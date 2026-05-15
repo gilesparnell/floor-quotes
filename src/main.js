@@ -4,19 +4,19 @@ import { APP_DISPLAY_VERSION } from './version.js'
 const artifacts = [
   {
     title: 'Investor one-pager',
-    href: '/artifacts/flooring-quote-system-one-pager.md',
+    href: '/artifacts/flooring-quote-system-one-pager.html',
     type: 'Business concept',
-    description: 'The concise product narrative: problem, users, value proposition, monetisation, and positioning.',
+    description: 'The product narrative in a styled webpage: problem, users, value proposition, monetisation, and positioning.',
   },
   {
     title: 'Technical architecture',
-    href: '/artifacts/technical-architecture.md',
+    href: '/artifacts/technical-architecture.html',
     type: 'System overview',
     description: 'The connected system model covering customer intake, project records, spatial processing, quoting, ordering, and AWS deployment.',
   },
   {
     title: 'Competitive scan',
-    href: '/artifacts/competitive-scan.md',
+    href: '/artifacts/competitive-scan.html',
     type: 'Market research',
     description: 'Why the wedge is not another generic flooring visualizer, and where local installer quote automation could win.',
   },
@@ -37,12 +37,6 @@ const artifacts = [
     href: '/artifacts/flooring-quote-mobile-mockups.html',
     type: 'Phone concepts',
     description: 'Cleaner phone-first screens for the same customer-to-installer quote workflow.',
-  },
-  {
-    title: 'Original document export',
-    href: '/artifacts/Flooring%20Quote%20Automation%20System.docx',
-    type: 'Document',
-    description: 'The original Word document export for sharing or further editing outside the web page.',
   },
 ]
 

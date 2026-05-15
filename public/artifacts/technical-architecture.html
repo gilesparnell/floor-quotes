@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Floor Quotes | Technical Architecture</title>
+  <link rel="stylesheet" href="./artifact.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="nav">
+      <a class="brand" href="/"><span class="mark"></span><span>Floor Quotes</span></a>
+      <a class="back" href="/#artifacts">Back to artifacts</a>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Technical architecture</p>
+        <h1>A shared project record connects intake, spatial evidence, quoting, ordering, and job planning.</h1>
+        <p class="lead">The platform is not a simple left-to-right visualizer pipeline. It is a workspace where customer, installer, catalogue, spatial processing, quote engine, and commercial integrations all read from and write back to the same project record.</p>
+      </div>
+      <aside class="summary">
+        <strong>Architecture principle</strong>
+        <p>Keep automation confidence-aware and installer-controlled. The system supports quoting; it does not pretend every measurement is final.</p>
+      </aside>
+    </header>
+
+    <section class="content">
+      <article class="section">
+        <h2>Supported inputs</h2>
+        <div class="cards">
+          <div class="card"><h3>iPhone RoomPlan</h3><p>LiDAR-supported room scans can provide structured geometry, walls, openings, and model assets once the workflow is proven.</p></div>
+          <div class="card"><h3>Room photos</h3><p>Web-first uploads support the MVP, giving installers visual evidence and a path to AI-assisted floor-area detection.</p></div>
+          <div class="card"><h3>2D plans</h3><p>PDFs, sketches, and images can be parsed or reviewed manually for measurement extraction.</p></div>
+          <div class="card"><h3>Manual dimensions</h3><p>Customer-entered measurements keep the MVP practical before full spatial automation is ready.</p></div>
+        </div>
+      </article>
+
+      <article class="section">
+        <h2>System model</h2>
+        <div class="copy">
+          <p>The project record is the source of truth for customer intent, room evidence, selected products, measurement confidence, quote assumptions, approval state, order pack, and job plan.</p>
+          <p>Each surface contributes to that record: customer intake adds evidence, spatial processing adds measurements and confidence, the catalogue adds product metadata, the quote engine adds assumptions and ranges, and the installer dashboard adds approval decisions and manual overrides.</p>
+        </div>
+      </article>
+
+      <article class="section">
+        <h2>Interconnectedness</h2>
+        <div class="table">
+          <div class="row header"><span>System area</span><span>Reads from</span><span>Writes back</span></div>
+          <div class="row"><strong>Customer intake</strong><span>Catalogue, branding, pricing guardrails</span><span>Contact details, suburb, budget, photos, scans, floor plans</span></div>
+          <div class="row"><strong>Spatial processing</strong><span>Uploaded assets, RoomPlan exports, manual dimensions</span><span>Room model, confidence scores, review flags, measurements</span></div>
+          <div class="row"><strong>Product selection</strong><span>Catalogue, availability, room type, budget signal</span><span>Selected products, alternates, style preferences</span></div>
+          <div class="row"><strong>Quote engine</strong><span>Room model, products, pack sizes, labour rules, waste, complexity</span><span>Quote range, assumptions, exclusions, quantities, duration</span></div>
+          <div class="row"><strong>Installer dashboard</strong><span>Project record, quote, confidence flags, products</span><span>Manual overrides, approved quote, follow-up notes, booking state</span></div>
+          <div class="row"><strong>Ordering workflow</strong><span>Approved quote, selected products, supplier mappings</span><span>Order pack, supplier request, missing-item flags</span></div>
+        </div>
+      </article>
+
+      <article class="section">
+        <h2>End-to-end flow</h2>
+        <div class="copy">
+          <ul class="list">
+            <li>Customer starts a project with contact details, address/suburb, room type, budget, preferred flooring, and room evidence.</li>
+            <li>Spatial capture or upload converts photos, scans, plans, and manual dimensions into a normalized room model.</li>
+            <li>Product selection pulls from installer or supplier catalogue data, including pack size, price, finish, install method, and accessories.</li>
+            <li>The quote engine combines area, waste, underlay, trims, adhesives, labour rate, preparation, complexity, and pricing rules.</li>
+            <li>The installer reviews assumptions, adjusts the estimate, and sends a polished customer quote.</li>
+            <li>The approved quote becomes an order pack and job plan.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="section">
+        <h2>AWS deployment</h2>
+        <div class="cards">
+          <div class="card"><h3>Web experience</h3><p>CloudFront and S3 serve the customer and installer web app quickly.</p></div>
+          <div class="card"><h3>Application services</h3><p>ECS Fargate behind an application load balancer hosts project, catalogue, quote, user, and ordering APIs.</p></div>
+          <div class="card"><h3>Async processing</h3><p>SQS, EventBridge, and worker services handle scan parsing, image processing, quote jobs, PDFs, notifications, and supplier sync.</p></div>
+          <div class="card"><h3>Data and files</h3><p>RDS Postgres stores structured records; S3 stores photos, scans, plans, RoomPlan exports, and quote reports.</p></div>
+        </div>
+      </article>
+
+      <article class="section">
+        <h2>MVP scope</h2>
+        <div class="copy">
+          <p>The first commercial MVP does not need full iPhone scanning or perfect AI measurement.</p>
+          <ul class="list">
+            <li>Web intake form, room photo upload, and manual dimension entry.</li>
+            <li>Product catalogue, quote calculator, and installer dashboard.</li>
+            <li>Approved quote to material order pack.</li>
+            <li>Rules-based job-duration estimate.</li>
+            <li>PDF or email quote output.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="section">
+        <h2>Risks</h2>
+        <div class="cards">
+          <div class="card"><h3>Measurement accuracy</h3><p>Use confidence scores and installer review. Avoid making final fixed-price promises automatically.</p></div>
+          <div class="card"><h3>Catalogue quality</h3><p>Product data can be messy, so onboarding tools and supplier mapping matter.</p></div>
+          <div class="card"><h3>Privacy</h3><p>Photos and scans are sensitive customer data; retention, access control, and storage rules need care.</p></div>
+          <div class="card"><h3>Supplier integration</h3><p>Start with CSV imports where APIs are unavailable, then evolve into richer ordering integrations.</p></div>
+        </div>
+      </article>
+
+      <article class="quote">
+        <p>Customer input becomes structured project data, structured project data becomes a quote, and an approved quote becomes an order pack and job plan.</p>
+      </article>
+    </section>
+
+    <footer class="footer"><span>Parnell Systems</span><span>Floor Quotes artifact</span></footer>
+  </main>
+</body>
+</html>
