@@ -1,4 +1,10 @@
 {
+  "rewrites": [
+    {
+      "source": "/changelog",
+      "destination": "/index.html"
+    }
+  ],
   "redirects": [
     {
       "source": "/artifacts/flooring-quote-system-one-pager.md",

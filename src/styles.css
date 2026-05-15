@@ -312,6 +312,140 @@ footer {
   font-size: 12px;
 }
 
+footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+footer a:hover,
+footer a:focus-visible {
+  color: #0f7b67;
+  text-decoration: underline;
+  outline: none;
+}
+
+.changelog-page {
+  padding: 44px 0 76px;
+  border-top: 1px solid #dce2da;
+}
+
+.changelog-hero {
+  max-width: 900px;
+  margin-bottom: 40px;
+}
+
+.changelog-document {
+  max-width: 820px;
+  border: 1px solid #dce2da;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.76);
+  padding: clamp(22px, 4vw, 42px);
+  box-shadow: 0 22px 55px rgba(22, 28, 24, 0.1);
+}
+
+.changelog-document h1 {
+  margin-bottom: 12px;
+  font-size: clamp(34px, 5vw, 56px);
+  line-height: 1;
+}
+
+.changelog-document h2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+  scroll-margin-top: 24px;
+  margin: 32px 0 12px;
+  color: #0f7b67;
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.changelog-document h2:first-child {
+  margin-top: 0;
+}
+
+.version-anchor {
+  border: 1px solid #dce2da;
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: #718078;
+  background: #f7faf5;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.version-anchor:hover,
+.version-anchor:focus-visible {
+  color: #0a4c40;
+  border-color: #b9d9cd;
+  outline: none;
+}
+
+.changelog-document h3 {
+  margin: 18px 0 8px;
+  color: #3f4d47;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.changelog-document h3.dim,
+.changelog-document ul.dim,
+.changelog-document p.dim {
+  color: #7a8781;
+}
+
+.changelog-document ul {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 12px;
+  padding-left: 19px;
+  color: #18231f;
+  line-height: 1.55;
+}
+
+.changelog-document p {
+  margin: 0 0 12px;
+  color: #5c6a64;
+  line-height: 1.55;
+}
+
+.changelog-document code {
+  border: 1px solid #dce2da;
+  border-radius: 6px;
+  padding: 1px 5px;
+  background: #f7faf5;
+  color: #0a4c40;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 0.92em;
+}
+
+.changelog-document hr {
+  border: 0;
+  border-top: 1px solid #dce2da;
+  margin: 28px 0;
+}
+
+.conventions {
+  margin: 16px 0 24px;
+  border: 1px solid #dce2da;
+  border-radius: 10px;
+  background: #f7faf5;
+  padding: 14px 16px;
+}
+
+.conventions summary {
+  color: #0f7b67;
+  cursor: pointer;
+  font-weight: 900;
+}
+
 @media (max-width: 900px) {
   main {
     padding: 20px;
