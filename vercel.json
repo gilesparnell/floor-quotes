@@ -1,0 +1,24 @@
+{
+  "redirects": [
+    {
+      "source": "/artifacts/flooring-quote-system-one-pager.md",
+      "destination": "/artifacts/flooring-quote-system-one-pager.html",
+      "permanent": true
+    },
+    {
+      "source": "/artifacts/technical-architecture.md",
+      "destination": "/artifacts/technical-architecture.html",
+      "permanent": true
+    },
+    {
+      "source": "/artifacts/competitive-scan.md",
+      "destination": "/artifacts/competitive-scan.html",
+      "permanent": true
+    },
+    {
+      "source": "/artifacts/Flooring%20Quote%20Automation%20System.docx",
+      "destination": "/artifacts/flooring-quote-system-one-pager.html",
+      "permanent": true
+    }
+  ]
+}

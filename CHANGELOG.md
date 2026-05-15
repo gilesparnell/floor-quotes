@@ -13,12 +13,14 @@ Each entry is split into:
 
 ---
 
-## [0.1.0] - 2026-05-16 AEST
+## [0.1.0 -> 0.1.1] - 2026-05-16 AEST
 
 ### What's new
 - The Floor Quotes concept now has a simple public webpage explaining the product motivation and linking to the written and visual artifacts.
 - Visitors can open the one-pager, technical architecture, competitive scan, architecture map, desktop mockups, and mobile mockups from one place.
+- The written artifacts now open as styled webpages instead of raw Markdown or a separate Word document export.
 
 ### Under the hood
 - Added a Vite static site with build-time version display in `src/version.js`.
 - Added `scripts/verify-site.mjs` to verify artifact links, required copy, version metadata, and changelog structure before deployment.
+- Replaced public Markdown and Word artifact links with HTML artifact pages that share a consistent visual system.
