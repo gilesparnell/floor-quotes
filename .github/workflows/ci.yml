@@ -27,5 +27,8 @@ jobs:
       - name: Verify site contract
         run: npm run verify
 
+      - name: Run tests
+        run: npm test
+
       - name: Build production site
         run: npm run build

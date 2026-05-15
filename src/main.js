@@ -1,4 +1,11 @@
 import './styles.css'
+import changelogText from '../CHANGELOG.md?raw'
+import {
+  annotateChangelogBlocks,
+  extractVersionSlug,
+  parseChangelog,
+  splitConventionsBlocks,
+} from './changelog.js'
 import { APP_DISPLAY_VERSION } from './version.js'
 
 const artifacts = [
@@ -40,7 +47,124 @@ const artifacts = [
   },
 ]
 
-document.querySelector('#app').innerHTML = `
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;')
+}
+
+function renderInlineMarkdown(text) {
+  return escapeHtml(text)
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+}
+
+function renderChangelogBlock(block) {
+  const dimClass = block.dim ? ' dim' : ''
+
+  if (block.type === 'h1') {
+    return `<h1>${renderInlineMarkdown(block.text)}</h1>`
+  }
+
+  if (block.type === 'h2') {
+    const slug = extractVersionSlug(block.text)
+    const anchor = slug
+      ? `<a class="version-anchor" href="/changelog#${slug}" aria-label="Link to ${escapeHtml(slug)}">link</a>`
+      : ''
+
+    return `
+      <h2 ${slug ? `id="${escapeHtml(slug)}"` : ''}>
+        <span>${renderInlineMarkdown(block.text)}</span>
+        ${anchor}
+      </h2>
+    `
+  }
+
+  if (block.type === 'h3') {
+    return `<h3 class="${dimClass.trim()}">${renderInlineMarkdown(block.text)}</h3>`
+  }
+
+  if (block.type === 'ul') {
+    return `
+      <ul class="${dimClass.trim()}">
+        ${block.items.map((item) => `<li>${renderInlineMarkdown(item)}</li>`).join('')}
+      </ul>
+    `
+  }
+
+  if (block.type === 'p') {
+    return `<p class="${dimClass.trim()}">${renderInlineMarkdown(block.text)}</p>`
+  }
+
+  if (block.type === 'hr') {
+    return '<hr />'
+  }
+
+  return ''
+}
+
+function renderChangelogPage() {
+  const allBlocks = annotateChangelogBlocks(parseChangelog(changelogText))
+  const { before, conventions, after } = splitConventionsBlocks(allBlocks)
+
+  document.querySelector('#app').innerHTML = `
+    <main>
+      <nav class="nav" aria-label="Project navigation">
+        <a class="brand" href="/" aria-label="Floor Quotes home">
+          <span class="mark"></span>
+          <span>Floor Quotes</span>
+        </a>
+        <div class="nav-links">
+          <a href="/">Home</a>
+          <a href="/#artifacts">Artifacts</a>
+        </div>
+      </nav>
+
+      <section class="changelog-page">
+        <div class="changelog-hero">
+          <p class="eyebrow">Changelog</p>
+          <h1>What changed, why it matters, and the technical notes behind it.</h1>
+          <p class="lead">
+            Each version is linkable. The customer-facing changes stay prominent; implementation detail sits under
+            “Under the hood” in a lower-contrast treatment.
+          </p>
+        </div>
+
+        <article class="changelog-document">
+          ${before.map(renderChangelogBlock).join('')}
+          ${conventions.length > 0 ? `
+            <details class="conventions">
+              <summary>Conventions</summary>
+              ${conventions
+                .filter((block, index) => !(index === 0 && block.type === 'h2'))
+                .map(renderChangelogBlock)
+                .join('')}
+            </details>
+          ` : ''}
+          ${after.map(renderChangelogBlock).join('')}
+        </article>
+      </section>
+
+      <footer>
+        <span>Parnell Systems</span>
+        <a href="/changelog#0.1.2">${APP_DISPLAY_VERSION}</a>
+      </footer>
+    </main>
+  `
+
+  const hash = window.location.hash.replace(/^#/, '')
+  if (hash) {
+    window.requestAnimationFrame(() => {
+      document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
+  }
+}
+
+function renderHomePage() {
+  document.querySelector('#app').innerHTML = `
   <main>
     <section class="hero">
       <nav class="nav" aria-label="Project navigation">
@@ -163,7 +287,14 @@ document.querySelector('#app').innerHTML = `
 
     <footer>
       <span>Parnell Systems</span>
-      <span>${APP_DISPLAY_VERSION}</span>
+      <a href="/changelog#0.1.2">${APP_DISPLAY_VERSION}</a>
     </footer>
   </main>
 `
+}
+
+if (window.location.pathname === '/changelog') {
+  renderChangelogPage()
+} else {
+  renderHomePage()
+}

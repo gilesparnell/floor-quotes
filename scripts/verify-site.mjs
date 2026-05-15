@@ -1,12 +1,13 @@
 import { readFileSync, existsSync } from 'node:fs'
 
-const expectedVersion = '0.1.1'
+const expectedVersion = '0.1.2'
 const requiredFiles = [
   'package.json',
   'CHANGELOG.md',
   'index.html',
   'src/main.js',
   'src/styles.css',
+  'src/changelog.js',
   'src/version.js',
   'vercel.json',
   'public/artifacts/flooring-quote-system-one-pager.html',
@@ -43,6 +44,7 @@ const requiredCopy = [
   'flooring-quote-app-mockups.html',
   'flooring-quote-mobile-mockups.html',
   'APP_DISPLAY_VERSION',
+  '/changelog#0.1.2',
 ]
 
 const missingCopy = requiredCopy.filter((text) => !source.includes(text))
@@ -81,6 +83,12 @@ for (const heading of ["What's new", 'Under the hood']) {
   }
 }
 
+for (const text of ['[0.1.1 -> 0.1.2]', 'changelog page', 'versions are linkable']) {
+  if (!changelog.includes(text)) {
+    throw new Error(`CHANGELOG.md missing ${text}`)
+  }
+}
+
 const vercelConfig = readFileSync('vercel.json', 'utf8')
 for (const redirect of [
   'flooring-quote-system-one-pager.md',
@@ -91,6 +99,10 @@ for (const redirect of [
   if (!vercelConfig.includes(redirect)) {
     throw new Error(`vercel.json missing redirect for ${redirect}`)
   }
+}
+
+if (!vercelConfig.includes('"source": "/changelog"') || !vercelConfig.includes('"destination": "/index.html"')) {
+  throw new Error('vercel.json missing /changelog rewrite')
 }
 
 for (const file of requiredFiles.filter((file) => file.endsWith('.html'))) {
