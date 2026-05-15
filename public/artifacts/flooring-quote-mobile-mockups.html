@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flooring Quote Mobile Mockups</title>
+  <style>
+    :root {
+      --ink: #111816;
+      --muted: #69756f;
+      --faint: #9aa39d;
+      --line: #e1e5df;
+      --paper: #f7f8f4;
+      --surface: #ffffff;
+      --green: #0f7b67;
+      --green-dark: #0a4c40;
+      --amber: #bd7a32;
+      --blue: #315d78;
+      --shadow: 0 22px 55px rgba(20, 28, 24, 0.13);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Aptos", "Segoe UI", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 18%, rgba(15, 123, 103, 0.12), transparent 28%),
+        radial-gradient(circle at 88% 12%, rgba(49, 93, 120, 0.1), transparent 26%),
+        var(--paper);
+    }
+
+    .page {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 36px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      gap: 28px;
+      align-items: end;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 22px;
+      margin-bottom: 30px;
+    }
+
+    .brand {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      max-width: 760px;
+      font-size: 42px;
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.45;
+      margin-top: 12px;
+    }
+
+    .caption {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      max-width: 370px;
+      text-align: right;
+    }
+
+    .phone-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px;
+      align-items: start;
+    }
+
+    .phone-card {
+      display: grid;
+      gap: 12px;
+    }
+
+    .screen-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: baseline;
+      min-height: 44px;
+    }
+
+    .screen-title h2 {
+      font-size: 15px;
+      letter-spacing: -0.01em;
+    }
+
+    .screen-title span {
+      color: var(--faint);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .phone {
+      width: 100%;
+      max-width: 330px;
+      min-height: 690px;
+      margin: 0 auto;
+      border: 10px solid #151a18;
+      border-radius: 34px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .phone::before {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      width: 86px;
+      height: 20px;
+      transform: translateX(-50%);
+      border-radius: 0 0 16px 16px;
+      background: #151a18;
+      z-index: 3;
+    }
+
+    .statusbar {
+      height: 36px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      padding: 0 18px 7px;
+      color: #202724;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .app {
+      min-height: 644px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top {
+      padding: 18px 18px 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .app-label {
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .top h3 {
+      font-size: 24px;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .top p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .content {
+      display: grid;
+      gap: 14px;
+      padding: 16px 18px 92px;
+      flex: 1;
+    }
+
+    .progress {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .bar {
+      height: 4px;
+      border-radius: 999px;
+      background: #e5e9e3;
+    }
+
+    .bar.on {
+      background: var(--green);
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .label {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .input {
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 11px 12px;
+      font-size: 14px;
+      line-height: 1.25;
+      background: #fbfcf9;
+    }
+
+    .upload {
+      border: 1px dashed #c6cdc5;
+      border-radius: 16px;
+      min-height: 132px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 16px;
+      background: #f8faf6;
+    }
+
+    .upload strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 5px;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .bottom-action {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 14px 18px 18px;
+      background: rgba(255, 255, 255, 0.96);
+      border-top: 1px solid var(--line);
+    }
+
+    .button {
+      width: 100%;
+      border-radius: 999px;
+      background: var(--green);
+      color: #fff;
+      text-align: center;
+      padding: 13px 16px;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .ghost {
+      background: #eef7f4;
+      color: var(--green-dark);
+    }
+
+    .hero-preview {
+      min-height: 180px;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(145deg, transparent 0 40%, rgba(15, 123, 103, 0.22) 40% 68%, transparent 68%),
+        repeating-linear-gradient(105deg, #c39a62 0 9px, #dfbc7f 9px 18px);
+    }
+
+    .hero-preview::after {
+      content: "";
+      position: absolute;
+      inset: 24px 36px 52px 24px;
+      border: 2px solid rgba(255, 255, 255, 0.82);
+      transform: skew(-9deg);
+    }
+
+    .badge {
+      display: inline-flex;
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 11px;
+      font-weight: 900;
+      color: #fff;
+      background: var(--amber);
+    }
+
+    .badge.green {
+      background: var(--green);
+    }
+
+    .preview-meta {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .product-list,
+    .quote-lines,
+    .lead-list,
+    .timeline {
+      display: grid;
+      gap: 10px;
+    }
+
+    .product {
+      display: grid;
+      grid-template-columns: 52px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px;
+      background: #fbfcf9;
+    }
+
+    .swatch {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: repeating-linear-gradient(90deg, #caa46c 0 9px, #e0bf84 9px 18px);
+    }
+
+    .swatch.dark {
+      background: repeating-linear-gradient(90deg, #836145 0 9px, #9a7656 9px 18px);
+    }
+
+    .swatch.grey {
+      background: repeating-linear-gradient(90deg, #92938c 0 9px, #b0b0a8 9px 18px);
+    }
+
+    .product strong,
+    .line strong,
+    .lead strong,
+    .event strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+
+    .price {
+      color: var(--green-dark);
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .quote-summary {
+      border-radius: 18px;
+      background: var(--green-dark);
+      color: #fff;
+      padding: 16px;
+    }
+
+    .quote-summary strong {
+      display: block;
+      font-size: 31px;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .quote-summary span {
+      color: #cfe8df;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .line {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 9px;
+      font-size: 13px;
+    }
+
+    .line:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .lead {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      background: #fbfcf9;
+    }
+
+    .lead.active {
+      border-color: rgba(15, 123, 103, 0.45);
+      box-shadow: inset 4px 0 0 var(--green);
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 11px;
+      background: #fbfcf9;
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--green-dark);
+      font-size: 20px;
+      margin-bottom: 2px;
+    }
+
+    .event {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 9px;
+      align-items: start;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--green);
+      margin-top: 4px;
+      box-shadow: 0 0 0 4px #e1f1ec;
+    }
+
+    .order-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      background: #fbfcf9;
+      font-size: 13px;
+    }
+
+    .order-item strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .status {
+      border-radius: 999px;
+      padding: 5px 8px;
+      align-self: start;
+      color: var(--green-dark);
+      background: #e7f4ef;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 1240px) {
+      .phone-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        padding: 24px 18px;
+      }
+
+      header,
+      .phone-grid {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        display: grid;
+      }
+
+      .caption {
+        text-align: left;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div>
+        <div class="brand">Parnell Systems</div>
+        <h1>Flooring Quote Automation System: Mobile Mockups</h1>
+        <p class="subtitle">
+          Cleaner phone-first screens that keep the same outcome: structured intake, product confidence, quote review, and order-pack handoff.
+        </p>
+      </div>
+      <p class="caption">
+        These screens show the MVP as a practical mobile web experience rather than a feature-heavy desktop dashboard.
+      </p>
+    </header>
+
+    <section class="phone-grid">
+      <article class="phone-card">
+        <div class="screen-title">
+          <h2>Customer intake</h2>
+          <span>homeowner</span>
+        </div>
+        <div class="phone" id="customer-intake">
+          <div class="statusbar"><span>9:41</span><span>5G 100%</span></div>
+          <div class="app">
+            <section class="top">
+              <div class="app-label">Harbour Floors</div>
+              <h3>Start your flooring quote</h3>
+              <p>Share the room, upload photos, and get a realistic range before booking a visit.</p>
+            </section>
+            <section class="content">
+              <div class="progress">
+                <div class="bar on"></div>
+                <div class="bar on"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+              </div>
+              <div class="field">
+                <div class="label">Room</div>
+                <div class="input">Open-plan living and hallway</div>
+              </div>
+              <div class="field">
+                <div class="label">Approximate size</div>
+                <div class="input">6.4m x 4.8m, plus short hall</div>
+              </div>
+              <div class="field">
+                <div class="label">Current surface</div>
+                <div class="input">Old carpet, concrete slab underneath</div>
+              </div>
+              <div class="upload">
+                <div>
+                  <strong>Add room photos</strong>
+                  <p class="small">Photos now. RoomPlan scan can be added later.</p>
+                </div>
+              </div>
+            </section>
+            <div class="bottom-action">
+              <div class="button">Continue</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="phone-card">
+        <div class="screen-title">
+          <h2>Product and range</h2>
+          <span>customer</span>
+        </div>
+        <div class="phone" id="product-selection">
+          <div class="statusbar"><span>9:41</span><span>5G 100%</span></div>
+          <div class="app">
+            <section class="top">
+              <div class="app-label">Quote preview</div>
+              <h3>Choose a finish</h3>
+              <p>See a simple room preview and compare products before requesting installer review.</p>
+            </section>
+            <section class="content">
+              <div class="hero-preview">
+                <div class="preview-meta">
+                  <span class="badge">Needs review</span>
+                  <span class="badge green">32.6m2</span>
+                </div>
+              </div>
+              <div class="product-list">
+                <div class="product">
+                  <div class="swatch"></div>
+                  <div>
+                    <strong>Natural Oak Hybrid</strong>
+                    <p class="small">Warm, durable, low-maintenance</p>
+                  </div>
+                  <span class="price">$58/m2</span>
+                </div>
+                <div class="product">
+                  <div class="swatch dark"></div>
+                  <div>
+                    <strong>Warm Walnut Laminate</strong>
+                    <p class="small">Lower-cost timber look</p>
+                  </div>
+                  <span class="price">$42/m2</span>
+                </div>
+                <div class="product">
+                  <div class="swatch grey"></div>
+                  <div>
+                    <strong>Stone Grey Vinyl</strong>
+                    <p class="small">Water resistant and quiet</p>
+                  </div>
+                  <span class="price">$49/m2</span>
+                </div>
+              </div>
+              <div class="quote-summary">
+                <strong>$4,950-$6,200</strong>
+                <span>Indicative installed range, subject to installer confirmation.</span>
+              </div>
+            </section>
+            <div class="bottom-action">
+              <div class="button">Request quote review</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="phone-card">
+        <div class="screen-title">
+          <h2>Installer review</h2>
+          <span>trade</span>
+        </div>
+        <div class="phone" id="quote-review">
+          <div class="statusbar"><span>9:41</span><span>5G 100%</span></div>
+          <div class="app">
+            <section class="top">
+              <div class="app-label">Lead review</div>
+              <h3>Sarah M.</h3>
+              <p>Review the assumptions before sending a customer-ready quote.</p>
+            </section>
+            <section class="content">
+              <div class="lead-list">
+                <div class="lead active">
+                  <strong>Living + hallway</strong>
+                  <p class="small">Natural Oak Hybrid. Medium confidence. Site visit recommended.</p>
+                </div>
+              </div>
+              <div class="metric-grid">
+                <div class="metric"><strong>32.6m2</strong><span class="small">detected area</span></div>
+                <div class="metric"><strong>10%</strong><span class="small">waste factor</span></div>
+                <div class="metric"><strong>$5,580</strong><span class="small">midpoint</span></div>
+                <div class="metric"><strong>2-3</strong><span class="small">job days</span></div>
+              </div>
+              <div class="quote-lines">
+                <div class="line"><span>Prep allowance</span><strong>$420</strong></div>
+                <div class="line"><span>Skirting and trims</span><strong>$310</strong></div>
+                <div class="line"><span>Carpet removal</span><strong>$280</strong></div>
+                <div class="line"><span>Customer range</span><strong>$5,250-$6,050</strong></div>
+              </div>
+            </section>
+            <div class="bottom-action">
+              <div class="button">Send polished quote</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="phone-card">
+        <div class="screen-title">
+          <h2>Order pack</h2>
+          <span>ops</span>
+        </div>
+        <div class="phone" id="order-pack">
+          <div class="statusbar"><span>9:41</span><span>5G 100%</span></div>
+          <div class="app">
+            <section class="top">
+              <div class="app-label">Approved quote</div>
+              <h3>Ready to order</h3>
+              <p>The accepted quote becomes a material list and job-planning record.</p>
+            </section>
+            <section class="content">
+              <div class="quote-summary">
+                <strong>$5,740</strong>
+                <span>Deposit requested: $1,435. Scheduled allowance: 3 days.</span>
+              </div>
+              <div class="order-item">
+                <div>
+                  <strong>Natural Oak Hybrid</strong>
+                  <p class="small">13 packs from Supplier A</p>
+                </div>
+                <span class="status">Ready</span>
+              </div>
+              <div class="order-item">
+                <div>
+                  <strong>Acoustic underlay</strong>
+                  <p class="small">4 rolls from Supplier A</p>
+                </div>
+                <span class="status">Ready</span>
+              </div>
+              <div class="order-item">
+                <div>
+                  <strong>Scotia trim</strong>
+                  <p class="small">42lm. Colour needs confirmation.</p>
+                </div>
+                <span class="status">Check</span>
+              </div>
+              <div class="timeline">
+                <div class="event">
+                  <span class="dot"></span>
+                  <p class="small"><strong>Customer approved</strong> Quote accepted and deposit request created.</p>
+                </div>
+                <div class="event">
+                  <span class="dot"></span>
+                  <p class="small"><strong>Next step</strong> Confirm trim colour, then create supplier order.</p>
+                </div>
+              </div>
+            </section>
+            <div class="bottom-action">
+              <div class="button">Create supplier order</div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

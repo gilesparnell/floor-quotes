@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flooring Quote Automation System Architecture</title>
+  <style>
+    :root {
+      --ink: #101c1a;
+      --muted: #596b66;
+      --paper: #f8f5ec;
+      --panel: #fffdf7;
+      --line: #d9d0bd;
+      --green: #14745f;
+      --green-dark: #0d4c40;
+      --blue: #315e80;
+      --clay: #a95f3c;
+      --gold: #bd8832;
+      --charcoal: #1f2624;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Aptos", "Segoe UI", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 16%, rgba(20, 116, 95, 0.18), transparent 24%),
+        radial-gradient(circle at 88% 18%, rgba(169, 95, 60, 0.16), transparent 22%),
+        linear-gradient(135deg, #fffaf1 0%, var(--paper) 56%, #ebe1cf 100%);
+    }
+
+    .page {
+      width: min(1520px, 100%);
+      margin: 0 auto;
+      padding: 34px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: end;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    h1,
+    h2,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 38px;
+      line-height: 1.04;
+      max-width: 780px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      max-width: 760px;
+      margin-top: 10px;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    .contact {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      text-align: right;
+    }
+
+    .architecture {
+      position: relative;
+      min-height: 780px;
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 247, 0.84);
+      border-radius: 8px;
+      box-shadow: 0 18px 48px rgba(38, 29, 15, 0.14);
+      overflow: hidden;
+    }
+
+    .architecture svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .flow-line {
+      fill: none;
+      stroke: rgba(20, 76, 64, 0.34);
+      stroke-width: 2.4;
+    }
+
+    .flow-line.secondary {
+      stroke: rgba(49, 94, 128, 0.32);
+      stroke-dasharray: 7 7;
+    }
+
+    .node {
+      position: absolute;
+      width: 224px;
+      min-height: 116px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: 0 12px 30px rgba(31, 38, 36, 0.1);
+    }
+
+    .node h2 {
+      font-size: 15px;
+      margin-bottom: 7px;
+    }
+
+    .node p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .node .tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 4px 8px;
+      margin-bottom: 9px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .customer .tag,
+    .experience .tag {
+      background: #e7f3ef;
+      color: var(--green-dark);
+    }
+
+    .spatial .tag {
+      background: #f9eadf;
+      color: var(--clay);
+    }
+
+    .catalogue .tag {
+      background: #eef4f8;
+      color: var(--blue);
+    }
+
+    .commercial .tag {
+      background: #fbf0d6;
+      color: #81560f;
+    }
+
+    .platform .tag {
+      background: #ebe6dc;
+      color: var(--charcoal);
+    }
+
+    .centre {
+      left: 50%;
+      top: 50%;
+      width: 310px;
+      min-height: 190px;
+      transform: translate(-50%, -50%);
+      background: var(--green-dark);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.28);
+      box-shadow: 0 22px 60px rgba(13, 76, 64, 0.36);
+    }
+
+    .centre h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .centre p {
+      color: #d8ebe4;
+      font-size: 13px;
+    }
+
+    .centre .tag {
+      background: rgba(255, 255, 255, 0.16);
+      color: #fff;
+    }
+
+    .n1 { left: 5%; top: 9%; }
+    .n2 { left: 39%; top: 5%; }
+    .n3 { right: 5%; top: 10%; }
+    .n4 { left: 5%; top: 41%; }
+    .n5 { right: 5%; top: 42%; }
+    .n6 { left: 8%; bottom: 8%; }
+    .n7 { left: 39%; bottom: 5%; }
+    .n8 { right: 8%; bottom: 8%; }
+
+    .notes {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .note {
+      background: var(--charcoal);
+      color: #fff;
+      border-radius: 8px;
+      padding: 15px;
+    }
+
+    .note strong {
+      display: block;
+      color: #9ad7c4;
+      margin-bottom: 4px;
+    }
+
+    .note span {
+      color: #d2d7d4;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 820px) {
+      header,
+      .notes {
+        grid-template-columns: 1fr;
+      }
+
+      .contact {
+        text-align: left;
+      }
+
+      .architecture {
+        display: grid;
+        gap: 14px;
+        min-height: auto;
+        padding: 16px;
+      }
+
+      .architecture svg {
+        display: none;
+      }
+
+      .node,
+      .centre {
+        position: static;
+        width: auto;
+        min-height: 0;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div>
+        <div class="brand">Parnell Systems</div>
+        <h1>Flooring Quote Automation System</h1>
+        <p class="subtitle">
+          Interconnected system map for customer intake, spatial processing, quote generation, installer review, ordering, and job planning.
+        </p>
+      </div>
+      <div class="contact">
+        parnellsystems.com<br />
+        giles@parnellsystems.com<br />
+        ABN 39 171 610 698
+      </div>
+    </header>
+
+    <section class="architecture" aria-label="Interconnected architecture diagram">
+      <svg viewBox="0 0 1520 780" preserveAspectRatio="none" aria-hidden="true">
+        <path class="flow-line" d="M 250 150 C 420 180, 540 280, 685 368" />
+        <path class="flow-line" d="M 760 145 C 760 230, 760 280, 760 310" />
+        <path class="flow-line" d="M 1270 150 C 1100 190, 970 280, 835 368" />
+        <path class="flow-line" d="M 250 460 C 420 440, 545 420, 685 392" />
+        <path class="flow-line" d="M 1270 460 C 1100 442, 970 420, 835 392" />
+        <path class="flow-line" d="M 260 650 C 430 590, 550 500, 685 420" />
+        <path class="flow-line" d="M 760 650 C 760 570, 760 515, 760 470" />
+        <path class="flow-line" d="M 1260 650 C 1090 590, 970 500, 835 420" />
+        <path class="flow-line secondary" d="M 360 185 C 690 40, 950 45, 1160 182" />
+        <path class="flow-line secondary" d="M 1170 520 C 960 720, 560 720, 350 520" />
+      </svg>
+
+      <article class="node centre">
+        <span class="tag">source of truth</span>
+        <h2>Project Record</h2>
+        <p>
+          Customer intent, rooms, assets, measurements, product choices, quote assumptions, approval state, order pack, and job plan all live here.
+        </p>
+      </article>
+
+      <article class="node customer n1">
+        <span class="tag">customer</span>
+        <h2>Customer Intake</h2>
+        <p>Room details, address/suburb, budget signal, photos, scans, floor plans, and preferred flooring type.</p>
+      </article>
+
+      <article class="node spatial n2">
+        <span class="tag">spatial ai</span>
+        <h2>Spatial Processing</h2>
+        <p>RoomPlan import, photo floor detection, floor-plan parsing, confidence scoring, and manual-review flags.</p>
+      </article>
+
+      <article class="node catalogue n3">
+        <span class="tag">catalogue</span>
+        <h2>Product Catalogue</h2>
+        <p>Products, colours, finishes, pack sizes, pricing, availability, compatible underlay, and accessories.</p>
+      </article>
+
+      <article class="node experience n4">
+        <span class="tag">experience</span>
+        <h2>Customer App</h2>
+        <p>Guided quote request, product comparison, room preview, quote range, saved progress, and status updates.</p>
+      </article>
+
+      <article class="node experience n5">
+        <span class="tag">installer</span>
+        <h2>Installer Dashboard</h2>
+        <p>Lead triage, measurements, selected products, confidence flags, assumptions, quote approval, and follow-up notes.</p>
+      </article>
+
+      <article class="node commercial n6">
+        <span class="tag">quoting</span>
+        <h2>Quote Engine</h2>
+        <p>Combines area, waste, pack sizes, trims, underlay, labour, preparation, complexity, and installer pricing rules.</p>
+      </article>
+
+      <article class="node platform n7">
+        <span class="tag">platform</span>
+        <h2>AWS Platform</h2>
+        <p>CloudFront, ECS Fargate, SQS, RDS Postgres, S3, EventBridge, Secrets Manager, logs, traces, and worker jobs.</p>
+      </article>
+
+      <article class="node commercial n8">
+        <span class="tag">operations</span>
+        <h2>Ordering And Job Plan</h2>
+        <p>Approved quote becomes supplier-ready material list, deposit request, CRM/accounting export, schedule estimate, and customer next steps.</p>
+      </article>
+    </section>
+
+    <section class="notes">
+      <div class="note"><strong>Not just a visualizer</strong><span>The system continues after preview into quote review, approval, ordering, and work planning.</span></div>
+      <div class="note"><strong>Confidence-aware</strong><span>Spatial extraction stores confidence scores and review flags instead of pretending every measurement is final.</span></div>
+      <div class="note"><strong>Web-first MVP</strong><span>Manual dimensions and room photos can prove the workflow before native RoomPlan capture is added.</span></div>
+      <div class="note"><strong>Installer controlled</strong><span>The installer remains the final authority before a fixed quote is sent to the customer.</span></div>
+    </section>
+  </main>
+</body>
+</html>
