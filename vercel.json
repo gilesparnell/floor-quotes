@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/changelog",
-      "destination": "/index.html"
+      "destination": "/changelog/index.html"
     }
   ],
   "redirects": [

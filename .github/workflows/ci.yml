@@ -32,3 +32,6 @@ jobs:
 
       - name: Build production site
         run: npm run build
+
+      - name: Verify prerendered HTML
+        run: npm run verify:dist

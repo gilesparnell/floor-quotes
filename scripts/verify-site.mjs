@@ -1,14 +1,17 @@
 import { readFileSync, existsSync } from 'node:fs'
 
-const expectedVersion = '0.1.2'
+const expectedVersion = '0.1.3'
 const requiredFiles = [
   'package.json',
   'CHANGELOG.md',
   'index.html',
   'src/main.js',
+  'src/site.js',
   'src/styles.css',
   'src/changelog.js',
   'src/version.js',
+  'scripts/prerender-site.mjs',
+  'scripts/verify-dist.mjs',
   'vercel.json',
   'public/artifacts/flooring-quote-system-one-pager.html',
   'public/artifacts/technical-architecture.html',
@@ -34,7 +37,7 @@ if (!index.includes('id="app"')) {
   throw new Error('index.html must expose the Vite app mount')
 }
 
-const source = readFileSync('src/main.js', 'utf8')
+const source = `${readFileSync('src/main.js', 'utf8')}\n${readFileSync('src/site.js', 'utf8')}`
 const requiredCopy = [
   'Quote-ready spatial commerce for flooring installers',
   'flooring-quote-system-one-pager.html',
@@ -44,7 +47,9 @@ const requiredCopy = [
   'flooring-quote-app-mockups.html',
   'flooring-quote-mobile-mockups.html',
   'APP_DISPLAY_VERSION',
-  '/changelog#0.1.2',
+  '/changelog#0.1.3',
+  'renderHomeContent',
+  'renderChangelogContent',
 ]
 
 const missingCopy = requiredCopy.filter((text) => !source.includes(text))
@@ -83,7 +88,7 @@ for (const heading of ["What's new", 'Under the hood']) {
   }
 }
 
-for (const text of ['[0.1.1 -> 0.1.2]', 'changelog page', 'versions are linkable']) {
+for (const text of ['[0.1.1 -> 0.1.3]', 'changelog page', 'versions are linkable', 'AI review tools']) {
   if (!changelog.includes(text)) {
     throw new Error(`CHANGELOG.md missing ${text}`)
   }
@@ -101,8 +106,8 @@ for (const redirect of [
   }
 }
 
-if (!vercelConfig.includes('"source": "/changelog"') || !vercelConfig.includes('"destination": "/index.html"')) {
-  throw new Error('vercel.json missing /changelog rewrite')
+if (!vercelConfig.includes('"source": "/changelog"') || !vercelConfig.includes('"destination": "/changelog/index.html"')) {
+  throw new Error('vercel.json missing /changelog prerender rewrite')
 }
 
 for (const file of requiredFiles.filter((file) => file.endsWith('.html'))) {
