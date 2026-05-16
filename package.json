@@ -1,14 +1,15 @@
 {
   "name": "floor-quotes",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/prerender-site.mjs",
     "preview": "vite preview",
     "test": "node --test scripts/*.test.mjs",
-    "verify": "node scripts/verify-site.mjs"
+    "verify": "node scripts/verify-site.mjs",
+    "verify:dist": "node scripts/verify-dist.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.1.1",

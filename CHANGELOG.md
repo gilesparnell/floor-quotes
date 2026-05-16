@@ -13,16 +13,18 @@ Each entry is split into:
 
 ---
 
-## [0.1.1 -> 0.1.2] - 2026-05-16 AEST
+## [0.1.1 -> 0.1.3] - 2026-05-16 AEST
 
 ### What's new
 - The footer version now links to a dedicated changelog page.
 - Changelog versions are linkable, so a specific release can be opened directly with a URL hash.
+- AI review tools can now read the homepage and changelog directly from the URL because the pages are pre-rendered as HTML.
 
 ### Under the hood
 - Added a lightweight changelog parser and renderer based on the Whole Life Challenge changelog pattern.
 - Added parser tests for headings, bullets, version-range anchors, and lower-contrast technical sections.
 - Updated the production verification contract to require the changelog route and footer link.
+- Added post-build prerendering for `/` and `/changelog`, plus a dist verification step that fails if the raw HTML falls back to an empty Vite shell.
 
 ---
 
