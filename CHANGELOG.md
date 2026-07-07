@@ -13,6 +13,16 @@ Each entry is split into:
 
 ---
 
+## [0.1.4] - 2026-07-07 AEST
+
+### What's new
+- The public concept site now shows only the product concept and contact details, with private business-registration information removed.
+
+### Under the hood
+- Removed the ABN line from the contact block in `flooring-quote-architecture.html` and its prerendered copy in `public/artifacts/flooring-quote-architecture.html` as part of the public-repo lockdown review.
+
+---
+
 ## [0.1.1 -> 0.1.3] - 2026-05-16 AEST
 
 ### What's new
@@ -31,11 +41,11 @@ Each entry is split into:
 ## [0.1.0 -> 0.1.1] - 2026-05-16 AEST
 
 ### What's new
-- The Floor Quotes concept now has a simple public webpage explaining the product motivation and linking to the written and visual artifacts.
+- The Floor Quotes concept now has a simple public webpage explaining the product motivation and linking to the written and visual artefacts.
 - Visitors can open the one-pager, technical architecture, competitive scan, architecture map, desktop mockups, and mobile mockups from one place.
-- The written artifacts now open as styled webpages instead of raw Markdown or a separate Word document export.
+- The written artefacts now open as styled webpages instead of raw Markdown or a separate Word document export.
 
 ### Under the hood
 - Added a Vite static site with build-time version display in `src/version.js`.
-- Added `scripts/verify-site.mjs` to verify artifact links, required copy, version metadata, and changelog structure before deployment.
-- Replaced public Markdown and Word artifact links with HTML artifact pages that share a consistent visual system.
+- Added `scripts/verify-site.mjs` to verify artefact links, required copy, version metadata, and changelog structure before deployment.
+- Replaced public Markdown and Word artefact links with HTML artefact pages that share a consistent visual system.
