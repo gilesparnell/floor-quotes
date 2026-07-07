@@ -147,7 +147,7 @@ export function renderChangelogContent(changelogText, displayVersion) {
 
       <footer>
         <span>Parnell Systems</span>
-        <a href="/changelog#0.1.3">${displayVersion}</a>
+        <a href="/changelog#0.1.4">${displayVersion}</a>
       </footer>
     </main>
   `
@@ -277,7 +277,7 @@ export function renderHomeContent(displayVersion) {
 
       <footer>
         <span>Parnell Systems</span>
-        <a href="/changelog#0.1.3">${displayVersion}</a>
+        <a href="/changelog#0.1.4">${displayVersion}</a>
       </footer>
     </main>
   `

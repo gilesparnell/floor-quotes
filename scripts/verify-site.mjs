@@ -1,6 +1,6 @@
 import { readFileSync, existsSync } from 'node:fs'
 
-const expectedVersion = '0.1.3'
+const expectedVersion = '0.1.4'
 const requiredFiles = [
   'package.json',
   'CHANGELOG.md',
@@ -47,7 +47,7 @@ const requiredCopy = [
   'flooring-quote-app-mockups.html',
   'flooring-quote-mobile-mockups.html',
   'APP_DISPLAY_VERSION',
-  '/changelog#0.1.3',
+  '/changelog#0.1.4',
   'renderHomeContent',
   'renderChangelogContent',
 ]
